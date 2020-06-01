@@ -10,17 +10,17 @@ public class ConfigurationReader {
 
     static {
         try {
-            try (FileInputStream fileInputStream = new FileInputStream("configuration.properties")) {
-                configFile = new Properties();
-                configFile.load(fileInputStream);
-            }
+            FileInputStream fileInputStream = new FileInputStream("configuration.properties");
+            configFile = new Properties();
+            configFile.load(fileInputStream);
+            fileInputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to load properties file!");
         }
     }
 
-    public static String getProperty(String propertyName) {
-        return configFile.getProperty(propertyName);
+    public static String getProperty(String key) {
+        return configFile.getProperty(key);
     }
 }
